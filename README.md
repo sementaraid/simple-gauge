@@ -13,6 +13,17 @@ npm run dev
 
 Then open the address Vite prints (usually http://localhost:5173).
 
+## Run it with Docker
+
+The image builds the site, then serves the static files with nginx on port 80.
+
+```bash
+docker build -t simple-gauge .
+docker run -d -p 8080:80 --name simple-gauge simple-gauge
+```
+
+Then open http://localhost:8080. To use another port, change the first number, for example `-p 3000:80`.
+
 ## Using the component
 
 The gauge lives in `src/components/DialGauge.jsx`.
