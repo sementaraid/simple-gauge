@@ -24,6 +24,14 @@ docker run -d -p 8080:80 --name simple-gauge simple-gauge
 
 Then open http://localhost:8080. To use another port, change the first number, for example `-p 3000:80`.
 
+### Deploy behind Caddy
+
+`compose.yaml` runs the container on the shared `web` Docker network as `simple-gauge`, without publishing any ports. The Caddy reverse proxy sends https://gauge.sunar.dev to it.
+
+```bash
+docker compose up -d --build
+```
+
 ## Using the component
 
 The gauge lives in `src/components/DialGauge.jsx`.

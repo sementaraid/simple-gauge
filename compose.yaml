@@ -1,0 +1,16 @@
+# Runs the gauge behind the shared Caddy reverse proxy.
+# The container joins the external `web` network as `simple-gauge`, and
+# Caddy serves it at https://gauge.sunar.dev (see the caddy repo's Caddyfile).
+# No ports are published here; Caddy is the only way in.
+services:
+  simple-gauge:
+    build: .
+    image: simple-gauge
+    container_name: simple-gauge
+    restart: unless-stopped
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
