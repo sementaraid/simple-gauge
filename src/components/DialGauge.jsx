@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import { useId } from "react";
 
 /**
  * DialGauge — a car-style dial: dark face, white markings,
@@ -131,34 +131,5 @@ export function DialGauge({
       </g>
       <circle cx={c} cy={c} r="9" fill={`url(#${id("hub")})`} stroke="#000" strokeWidth="1" />
     </svg>
-  );
-}
-
-/** Demo: speedometer and tachometer side by side, fed random values every second. */
-export default function App() {
-  const [speed, setSpeed] = useState(0);
-  const [rpm, setRpm] = useState(800);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setSpeed(Math.random() * 200);
-      setRpm(800 + Math.random() * 7000); // idle (800) up to 7800
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: 24, justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
-      <DialGauge value={speed} min={0} max={200} unit="km/h" />
-      <DialGauge
-        value={rpm}
-        min={0}
-        max={8000}
-        redline={6500}
-        majorSteps={8}
-        unit="x1000 r/min"
-        formatLabel={(v) => Math.round(v / 1000)}
-      />
-    </div>
   );
 }
